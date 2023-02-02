@@ -348,8 +348,8 @@ function App(props) {
                 paddingBlockStart: 12,
               }}
             >
-              <div>© 2021 Made with love</div>
-              <div>by Ant Design</div>
+              <div>© 2023 Made with ❤️</div>
+              <div>by cismet.de</div>
             </div>
           );
         }}
@@ -404,7 +404,7 @@ function App(props) {
         }}
         {...settings}
       >
-        <div style={{ zIndex: 10, marginTop: -30 }}>
+        <div style={{ _border: "1px solid blue", zIndex: 10, marginTop: 0 }}>
           <Outlet />
         </div>
 

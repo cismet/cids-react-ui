@@ -14,7 +14,7 @@ export default function FSSubpageContainer(props) {
   return (
     <div
       style={{
-        border: "1px solid red",
+        _border: "1px solid red",
         height: height - 56,
         marginTop: -26,
         marginLeft: -39,

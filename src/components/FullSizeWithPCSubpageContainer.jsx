@@ -1,4 +1,6 @@
 import useWindowSize from "@/hooks/useWindowSize";
+import ProCard from "@ant-design/pro-card";
+import { PageContainer } from "@ant-design/pro-layout";
 import { useEffect } from "react";
 
 export default function FSSubpageContainer({ title, children, extraArray, footerArray, subtitle }) {
@@ -14,9 +16,8 @@ export default function FSSubpageContainer({ title, children, extraArray, footer
   return (
     <PageContainer
       style={{
-        border: "1px solid red",
+        _border: "1px solid red",
         height: height - 126,
-
         overflow: "hidden",
       }}
       extra={extraArray}
@@ -24,15 +25,7 @@ export default function FSSubpageContainer({ title, children, extraArray, footer
       title={title}
       subTitle={subtitle}
     >
-      <ProCard
-        style={{
-          border: "1px solid orange",
-          height: height - 250,
-          minHeight: 800,
-        }}
-      >
-        {children}
-      </ProCard>
+      {children}
     </PageContainer>
   );
 }
