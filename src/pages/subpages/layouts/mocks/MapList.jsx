@@ -6,27 +6,29 @@ import ProCard from "@ant-design/pro-card";
 import { GridContent, PageContainer } from "@ant-design/pro-layout";
 import { Col, Row } from "antd";
 import "react-cismap/topicMaps.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import "leaflet/dist/leaflet.css";
+import { SimpleMapAtRathaus } from "@/components/mocks/Maps";
+import { ListWithAvatars, ListWithImages } from "@/components/mocks/Lists";
 
 export default function Dashboard(props) {
   const [responsive, setResponsive] = useState(false);
 
   return (
-    <PageContainer
-      subTitle="... a table with a supporting list and an overview-map"
-      extra={[
-        <Button key="3">Op3</Button>,
-        <Button key="2">Op2</Button>,
-        <Button key="1" type="primary">
-          Main OP
-        </Button>,
-      ]}
-    >
+    <PageContainer subTitle="... a map with supporting stats">
       <GridContent>
+        <Row gutter={12} style={{ marginBottom: 12 }}>
+          <Col span={24}>
+            <ProCard title="Map" style={{ height: "calc(60vh)" }}>
+              <SimpleMapAtRathaus mapStyle={{ width: "100%", height: "calc(60vh - 80px)" }} />
+            </ProCard>
+          </Col>
+        </Row>
         <Row gutter={12}>
           <Col span={24}>
-            <ProCard title="Docs" style={{ height: "calc(100vh - 170px)" }}></ProCard>
+            <ProCard title="List">
+              <ListWithImages />
+            </ProCard>
           </Col>
         </Row>
       </GridContent>
