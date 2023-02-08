@@ -6,19 +6,26 @@ import RcResizeObserver from "rc-resize-observer";
 import ProCard from "@ant-design/pro-card";
 import { Button, theme } from "antd";
 import { UndoOutlined, RedoOutlined, SaveFilled, PlusSquareFilled } from "@ant-design/icons";
-
-export const FirstDesigner = props => {
+import Color from "color";
+export const FirstDesigner = (props) => {
   const { editor, onReady } = useFabricJSEditor();
   const windowSize = useWindowSize();
   const height = windowSize[1];
   const [canvasHeight, setCanvasHeight] = useState(800);
   const [canvasWidth, setCanvasWidth] = useState(800);
+  const { useToken } = theme;
+
+  const { token } = useToken();
+  console.log("themeToken", token);
+
   useEffect(() => {
     if (!editor || !fabric) {
       return;
     }
-    editor.canvas.selectionColor = "#ffc10799";
+    const primary = new Color(token?.colorPrimary || "#ffc10799");
+    editor.canvas.selectionColor = primary.alpha(0.15);
     //     editor.canvas.loadFromJSON(example, editor.canvas.renderAll.bind(editor.canvas));
+
     editor.canvas.setBackgroundColor("#eeeeee");
 
     //     //editor.canvas.renderAll();
@@ -62,7 +69,7 @@ export const FirstDesigner = props => {
     "#daa520",
     "#ff7f50",
     "#87ceeb",
-    "#ba55d3"
+    "#ba55d3",
   ];
 
   const onAddCircle = () => {
@@ -73,7 +80,7 @@ export const FirstDesigner = props => {
       stroke: color + "ee",
       strokeWidth: 3,
       left: 100 + Math.random() * 400,
-      top: 100 + Math.random() * 400
+      top: 100 + Math.random() * 400,
     });
 
     editor?.canvas?.add(c);
@@ -87,7 +94,7 @@ export const FirstDesigner = props => {
       stroke: color + "ee",
       strokeWidth: 3,
       width: 20 + Math.random() * 80,
-      height: 20 + Math.random() * 80
+      height: 20 + Math.random() * 80,
     });
 
     editor?.canvas?.add(r);
@@ -95,7 +102,7 @@ export const FirstDesigner = props => {
   return (
     <RcResizeObserver
       key="resize-observer"
-      onResize={offset => {
+      onResize={(offset) => {
         console.log("offset", offset);
 
         setCanvasHeight(offset.height - 80);
@@ -107,7 +114,7 @@ export const FirstDesigner = props => {
         style={{ height: "calc(100vh - 170px)" }}
         extra={[
           <Button onClick={onAddCircle}>add a circle</Button>,
-          <Button onClick={onAddRectangle}>add a rect</Button>
+          <Button onClick={onAddRectangle}>add a rect</Button>,
         ]}
       >
         <FabricJSCanvas className="sample-canvas" onReady={onReady} />
