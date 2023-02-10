@@ -32,7 +32,6 @@ import { css } from "@emotion/css";
 // import "leaflet/dist/leaflet.css";
 // import "react-bootstrap-typeahead/css/Typeahead.css";
 import { Button, DatePicker, Space, version, Divider, Dropdown, Input } from "antd";
-// import "antd/dist/reset.css";
 
 import { PageContainer, ProLayout, SettingDrawer } from "@ant-design/pro-layout";
 
