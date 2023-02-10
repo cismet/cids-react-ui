@@ -20,8 +20,9 @@ const tailLayout = {
   textAlign: "end",
 };
 
-const LoginPage = ({ basepath = "" }) => {
+const LoginPage = ({ basepath = "", config }) => {
   const navigate = useNavigate();
+  const backgroundImage = "url(" + config.loginBackground + ")";
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -32,7 +33,7 @@ const LoginPage = ({ basepath = "" }) => {
   };
 
   return (
-    <div style={styles.loginPage}>
+    <div style={{ ...styles.loginPage, backgroundImage }}>
       <div style={styles.formContainer}>
         <div style={styles.floatingPanel}>
           <h2>cids Client</h2>
@@ -112,10 +113,8 @@ const LoginPage = ({ basepath = "" }) => {
 };
 
 export default LoginPage;
-const styles = {
+let styles = {
   loginPage: {
-    backgroundImage:
-      "url('https://images.unsplash.com/photo-1673422627994-ba82ef264160?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=5370&q=80')",
     backgroundSize: "cover",
     height: "100vh",
   },
