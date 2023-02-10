@@ -1,9 +1,20 @@
 import { HashRouter as Router, Routes, Navigate, Route, Link, useNavigate } from "react-router-dom";
-import Login from "@/pages/Login";
+import Login from "@/pages/login/Login";
 import ProLayout from "@/pages/layouts/ProLayout";
 import loadable from "@loadable/component";
 import Fragment from "react";
-import config from "@/_defaultProps";
+import _defaultConfig from "@/_defaultProps";
+import _demoConfig from "@/_demo";
+import _cismapConnectConfig from "@/_cismapConnect";
+import _lagisConfig from "@/_lagis";
+import _verdisConfig from "@/_verdis";
+import _vzkConfig from "@/_vzk";
+
+const demoConfig = { ..._defaultConfig, ..._demoConfig };
+const cismapConnectConfig = { ..._defaultConfig, ..._cismapConnectConfig };
+const lagisConfig = { ..._defaultConfig, ..._lagisConfig };
+const verdisConfig = { ..._defaultConfig, ..._verdisConfig };
+const vzkConfig = { ..._defaultConfig, ..._vzkConfig };
 
 const renderRoutes = (basepath, routes, parentPath) => {
   const r = routes.map((route) => {
@@ -62,10 +73,32 @@ const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate replace to="/demo" />} />
-      <Route path="/demo" element={<ProLayout basepath="/demo" config={config} />}>
-        {renderRoutes("/demo", config.route.routes)}
+      <Route path="/demo" element={<ProLayout basepath="/demo" config={demoConfig} />}>
+        {renderRoutes("/demo", demoConfig.route.routes)}
       </Route>
-      <Route path="/demo/login" element={<Login basepath="/demo" />} />
+      <Route path="/demo/login" element={<Login basepath="/demo" config={demoConfig} />} />
+
+      <Route path="/lagis" element={<ProLayout basepath="/lagis" config={lagisConfig} />}>
+        {renderRoutes("/lagis", lagisConfig.route.routes)}
+      </Route>
+      <Route path="/lagis/login" element={<Login basepath="/lagis" config={lagisConfig} />} />
+
+      <Route path="/verdis" element={<ProLayout basepath="/verdis" config={verdisConfig} />}>
+        {renderRoutes("/verdis", verdisConfig.route.routes)}
+      </Route>
+      <Route path="/verdis/login" element={<Login basepath="/verdis" config={verdisConfig} />} />
+
+      <Route path="/vzk" element={<ProLayout basepath="/vzk" config={vzkConfig} />}>
+        {renderRoutes("/vzk", vzkConfig.route.routes)}
+      </Route>
+      <Route path="/vzk/login" element={<Login basepath="/vzk" config={vzkConfig} />} />
+
+      <Route
+        path="/cismap-connect"
+        element={<ProLayout basepath="/cismap-connect" config={cismapConnectConfig} />}
+      >
+        {renderRoutes("/cismap-connect", cismapConnectConfig.route.routes)}
+      </Route>
     </Routes>
   );
 };
