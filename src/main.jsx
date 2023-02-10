@@ -12,6 +12,7 @@ import enUSProComponents from "@ant-design/pro-provider/lib/locale/en_US";
 
 import { ConfigProvider, DatePicker, Layout } from "antd";
 import { TinyArea } from "@ant-design/plots";
+//import "antd/dist/reset.css";
 
 console.log("navigator", navigator.language);
 window.localStorage.setItem("umi_locale", "en-US");
