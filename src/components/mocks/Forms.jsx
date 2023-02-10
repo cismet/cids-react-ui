@@ -1,5 +1,6 @@
-import { Checkbox, Grid, Input, Row, Col, Select } from "antd";
+import { Checkbox, Grid, Input, Row, Col, Select, Button, Form, Radio } from "antd";
 import Column from "antd/es/table/Column";
+import { useState } from "react";
 
 const onChange = (e) => {
   console.log(`checked = ${e.target.checked}`);
@@ -150,5 +151,63 @@ export const FlaechenDetailsEmpty = (props) => {
         </Value>
       </Row>
     </>
+  );
+};
+export const SampleVerticalForm = () => {
+  const [form] = Form.useForm();
+
+  const formLayout = "vertical";
+  const onFormLayoutChange = ({ layout }) => {
+    setFormLayout(layout);
+  };
+  const formItemLayout =
+    formLayout === "horizontal"
+      ? {
+          labelCol: {
+            span: 4,
+          },
+          wrapperCol: {
+            span: 14,
+          },
+        }
+      : null;
+  const buttonItemLayout =
+    formLayout === "horizontal"
+      ? {
+          wrapperCol: {
+            span: 14,
+            offset: 4,
+          },
+        }
+      : null;
+  return (
+    <Form
+      {...formItemLayout}
+      layout={formLayout}
+      form={form}
+      initialValues={{
+        layout: formLayout,
+      }}
+      onValuesChange={onFormLayoutChange}
+      style={{
+        maxWidth: 600,
+      }}
+    >
+      <Form.Item label="Field A">
+        <Input placeholder="input placeholder" />
+      </Form.Item>
+      <Form.Item label="Field B">
+        <Input placeholder="input placeholder" />
+      </Form.Item>
+      <Form.Item label="Field C">
+        <Input placeholder="input placeholder" />
+      </Form.Item>
+      <Form.Item label="Field D">
+        <Input placeholder="input placeholder" />
+      </Form.Item>
+      <Form.Item label="Field E">
+        <Input placeholder="input placeholder" />
+      </Form.Item>
+    </Form>
   );
 };
