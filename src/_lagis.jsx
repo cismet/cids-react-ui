@@ -5,6 +5,12 @@ const config = {
   logo: logo,
   loginBackground: "/assets/login/simon-wierzba-4N0uFUstIJk-unsplash.jpg",
 
+  layout: "mix",
+  splitMenus: false,
+  navTheme: "light",
+  contentWidth: "Fluid",
+  colorPrimary: "#722ED1",
+
   route: {
     routes: [
       {

@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Checkbox, Row, Col, Button, Typography, theme } from "antd";
 import { useNavigate, Link } from "react-router-dom";
+import Color from "color";
+import { useEditableArray } from "@ant-design/pro-utils";
+
 const { Title } = Typography;
 const layout = {
   labelCol: {
@@ -20,8 +23,23 @@ const tailLayout = {
   textAlign: "end",
 };
 
-const LoginPage = ({ basepath = "", config }) => {
+const LoginPage = ({ basepath = "", config, setTheme }) => {
+  const { useToken } = theme;
+
+  const { token } = useToken();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setTheme({
+      ...token,
+      ...{
+        token: {
+          colorPrimary: config.colorPrimary,
+        },
+      },
+    });
+  }, []);
+
   const backgroundImage = "url(" + config.loginBackground + ")";
 
   const onFinish = (values) => {
@@ -31,14 +49,14 @@ const LoginPage = ({ basepath = "", config }) => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-
+  console.log("token", token.colorPrimary);
+  const styles = getStyles(token);
   return (
     <div style={{ ...styles.loginPage, backgroundImage }}>
       <div style={styles.formContainer}>
         <div style={styles.floatingPanel}>
           <h2>cids Client</h2>
           <h3>Log in </h3>
-          ---
         </div>
         <Form
           {...layout}
@@ -81,7 +99,7 @@ const LoginPage = ({ basepath = "", config }) => {
 
           <Form.Item {...tailLayout}>
             <Row>
-              <Col span={24} style={{ textAlign: "center" }}>
+              <Col span={24} style={{ textalign: "center" }}>
                 <Button
                   style={{ width: "100%" }}
                   type="primary"
@@ -113,55 +131,63 @@ const LoginPage = ({ basepath = "", config }) => {
 };
 
 export default LoginPage;
-let styles = {
-  loginPage: {
-    backgroundSize: "cover",
-    height: "100vh",
-  },
-  formContainer: {
-    position: "absolute",
-    width: "500px",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "#ffffffdd",
-    opacity: "1",
-    padding: "20px",
-    borderRadius: "10px",
-  },
-  floatingPanel: {
-    margin: "-60px 16px 28px ",
-    padding: "26px",
-    textAlign: "center",
-    color: "white",
-    opacity: "1",
-    background: "linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232))",
-    borderRadius: "0.5rem",
-    boxShadow:
-      "rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(0 187 212 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem",
-  },
-  footer: {
-    position: "absolute",
-    bottom: "10px",
-    left: 0,
-    right: 0,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  copyright: {
-    color: "white",
-    marginLeft: "30px",
-  },
-  links: {
-    color: "white",
-    display: "flex",
-    justifyContent: "flex-end",
-    marginRight: "10px",
-  },
-  link: {
-    color: "white",
-    marginRight: "30px",
-    textDecoration: "none",
-  },
+
+const getStyles = (themeToken) => {
+  const colorPrimary = themeToken?.colorPrimary || "#ffc10799";
+  const primaryC = new Color(colorPrimary);
+  const primaryLightC = primaryC.lighten(0.1);
+  let styles = {
+    loginPage: {
+      backgroundSize: "cover",
+      height: "100vh",
+    },
+    formContainer: {
+      position: "absolute",
+      width: "500px",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "#ffffffdd",
+      opacity: "1",
+      padding: "20px",
+      borderRadius: "10px",
+    },
+    floatingPanel: {
+      margin: "-60px 16px 28px ",
+      padding: "26px",
+      textAlign: "center",
+      color: "white",
+      opacity: "1",
+      background: "linear-gradient(195deg, " + primaryC.hex() + ", " + primaryLightC.hex() + ")", // "linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232))",
+      borderRadius: "0.5rem",
+      boxShadow:
+        "rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(0 187 212 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem",
+    },
+    footer: {
+      position: "absolute",
+      bottom: "10px",
+      left: 0,
+      right: 0,
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    copyright: {
+      color: "white",
+      marginLeft: "30px",
+    },
+    links: {
+      color: "white",
+      display: "flex",
+      justifyContent: "flex-end",
+      marginRight: "10px",
+    },
+    link: {
+      color: "white",
+      marginRight: "30px",
+      textDecoration: "none",
+    },
+  };
+
+  return styles;
 };

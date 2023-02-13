@@ -2,7 +2,10 @@ import { HashRouter as Router, Routes, Navigate, Route, Link, useNavigate } from
 import Login from "@/pages/login/Login";
 import ProLayout from "@/pages/layouts/ProLayout";
 import loadable from "@loadable/component";
-import Fragment from "react";
+import { ConfigProvider } from "antd";
+import Fragment, { createContext, useState } from "react";
+import deDE from "antd/locale/de_DE";
+import enUS from "antd/locale/en_US";
 import _defaultConfig from "@/_defaultProps";
 import _demoConfig from "@/_demo";
 import _cismapConnectConfig from "@/_cismapConnect";
@@ -69,37 +72,74 @@ function useWindowSize() {
   }, []);
   return size;
 }
-const AppRouter = () => {
+
+export const ThemeSetterContext = createContext();
+
+const App = () => {
+  const [theme, setTheme] = useState();
   return (
-    <Routes>
-      <Route path="/" element={<Navigate replace to="/demo" />} />
-      <Route path="/demo" element={<ProLayout basepath="/demo" config={demoConfig} />}>
-        {renderRoutes("/demo", demoConfig.route.routes)}
-      </Route>
-      <Route path="/demo/login" element={<Login basepath="/demo" config={demoConfig} />} />
+    <ConfigProvider locale={deDE} theme={theme}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/demo" />} />
+          <Route
+            path="/demo"
+            element={<ProLayout basepath="/demo" config={demoConfig} setTheme={setTheme} />}
+          >
+            {renderRoutes("/demo", demoConfig.route.routes)}
+          </Route>
+          <Route
+            path="/demo/login"
+            element={<Login basepath="/demo" config={demoConfig} setTheme={setTheme} />}
+          />
+          <Route
+            path="/lagis"
+            element={<ProLayout basepath="/lagis" config={lagisConfig} setTheme={setTheme} />}
+          >
+            {renderRoutes("/lagis", lagisConfig.route.routes)}
+          </Route>
+          <Route
+            path="/lagis/login"
+            element={<Login basepath="/lagis" config={lagisConfig} setTheme={setTheme} />}
+          />
 
-      <Route path="/lagis" element={<ProLayout basepath="/lagis" config={lagisConfig} />}>
-        {renderRoutes("/lagis", lagisConfig.route.routes)}
-      </Route>
-      <Route path="/lagis/login" element={<Login basepath="/lagis" config={lagisConfig} />} />
+          <Route
+            path="/verdis"
+            element={<ProLayout basepath="/verdis" config={verdisConfig} setTheme={setTheme} />}
+          >
+            {renderRoutes("/verdis", verdisConfig.route.routes)}
+          </Route>
+          <Route
+            path="/verdis/login"
+            element={<Login basepath="/verdis" config={verdisConfig} setTheme={setTheme} />}
+          />
 
-      <Route path="/verdis" element={<ProLayout basepath="/verdis" config={verdisConfig} />}>
-        {renderRoutes("/verdis", verdisConfig.route.routes)}
-      </Route>
-      <Route path="/verdis/login" element={<Login basepath="/verdis" config={verdisConfig} />} />
+          <Route
+            path="/vzk"
+            element={<ProLayout basepath="/vzk" config={vzkConfig} setTheme={setTheme} />}
+          >
+            {renderRoutes("/vzk", vzkConfig.route.routes)}
+          </Route>
+          <Route
+            path="/vzk/login"
+            element={<Login basepath="/vzk" config={vzkConfig} setTheme={setTheme} />}
+          />
 
-      <Route path="/vzk" element={<ProLayout basepath="/vzk" config={vzkConfig} />}>
-        {renderRoutes("/vzk", vzkConfig.route.routes)}
-      </Route>
-      <Route path="/vzk/login" element={<Login basepath="/vzk" config={vzkConfig} />} />
-
-      <Route
-        path="/cismap-connect"
-        element={<ProLayout basepath="/cismap-connect" config={cismapConnectConfig} />}
-      >
-        {renderRoutes("/cismap-connect", cismapConnectConfig.route.routes)}
-      </Route>
-    </Routes>
+          <Route
+            path="/cismap-connect"
+            element={
+              <ProLayout
+                basepath="/cismap-connect"
+                config={cismapConnectConfig}
+                setTheme={setTheme}
+              />
+            }
+          >
+            {renderRoutes("/cismap-connect", cismapConnectConfig.route.routes)}
+          </Route>
+        </Routes>
+      </Router>
+    </ConfigProvider>
   );
 };
-export default AppRouter;
+export default App;

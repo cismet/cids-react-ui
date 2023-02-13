@@ -3,6 +3,12 @@ import logo from "@/assets/cismetlogo.svg";
 const config = {
   title: "cismap-connect",
   logo: logo,
+
+  layout: "top",
+  splitMenus: false,
+  navTheme: "light",
+  contentWidth: "Fluid",
+  colorPrimary: "#2F54EB",
   route: {
     routes: [
       {

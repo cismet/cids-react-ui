@@ -16,7 +16,7 @@ export const FirstDesigner = (props) => {
   const { useToken } = theme;
 
   const { token } = useToken();
-  console.log("themeToken", token);
+  console.log("themeToken", token.colorPrimary);
 
   useEffect(() => {
     if (!editor || !fabric) {

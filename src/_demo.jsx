@@ -1,6 +1,20 @@
 import { ChromeFilled, CrownFilled, SmileFilled, TabletFilled } from "@ant-design/icons";
 import logo from "@/assets/cismetlogo.svg";
 const config = {
+  // fixSiderbar: true,
+  // layout: "mix",
+  // splitMenus: true,
+  // navTheme: "light",
+  // contentWidth: "Fluid",
+  // colorPrimary: "#1677FF",
+
+  fixSiderbar: true,
+  layout: "mix",
+  splitMenus: true,
+  navTheme: "light",
+  contentWidth: "Fluid",
+  colorPrimary: "#FA541C",
+
   route: {
     routes: [
       {

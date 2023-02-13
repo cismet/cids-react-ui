@@ -7,15 +7,12 @@ const config = {
   location: {
     pathname: "/",
   },
+
   appList: [
     {
       icon: "/src/assets/cismetlogo.svg",
       title: "cismap Connect",
-      desc: (
-        <span>
-          Vollbildkartenanwendung die sich automatisch<br></br> mit ihrer Fachanwendung verbindet
-        </span>
-      ),
+      desc: "verbindet sich automatisch mit ihrer App.",
       url: "/#/cismap-connect/",
     },
     {
@@ -44,7 +41,7 @@ const config = {
     },
     {
       icon: "/src/assets/cismetlogo.svg",
-      title: "cismet.dex",
+      title: "cismet.de",
       desc: "Webseiten der cismet GmbH",
       url: "https://cismet.de/",
       target: "_blank",

@@ -5,6 +5,11 @@ const config = {
   logo: logo,
   loginBackground: "/assets/login/anatol-rurac-XM776JMGLoY-unsplash.jpg",
 
+  layout: "mix",
+  splitMenus: true,
+  navTheme: "light",
+  contentWidth: "Fluid",
+  colorPrimary: "#13C2C2",
   route: {
     routes: [
       {

@@ -20,10 +20,8 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import TopicMapComponent from "react-cismap/topicmaps/TopicMapComponent";
-import { TopicMapContextProvider } from "react-cismap/contexts/TopicMapContextProvider";
-import ProCard from "@ant-design/pro-card";
 import { css } from "@emotion/css";
+import { theme } from "antd";
 
 // import Layout from "virtual:antd-layout";
 
@@ -31,11 +29,13 @@ import { css } from "@emotion/css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "leaflet/dist/leaflet.css";
 // import "react-bootstrap-typeahead/css/Typeahead.css";
-import { Button, DatePicker, Space, version, Divider, Dropdown, Input } from "antd";
+import { Button, DatePicker, Space, version, Divider, Dropdown, Input, ConfigProvider } from "antd";
 
 import { PageContainer, ProLayout, SettingDrawer } from "@ant-design/pro-layout";
 
 import { useEffect } from "react";
+import ColumnGroup from "antd/es/table/ColumnGroup";
+import { ThemeSetterContext } from "@/App";
 // import enUS from "antd/locale/en_US";
 // import enUSProComponents from "@ant-design/pro-provider/lib/locale/en_US";
 
@@ -98,12 +98,34 @@ const List = (props) => {
 };
 
 function App(props) {
-  const { basepath, config } = props;
+  const { basepath, config, setTheme } = props;
   const [count, setCount] = useState(0);
+  const { useToken } = theme;
+  useEffect(() => {
+    setTheme({
+      ...token,
+      ...{
+        token: {
+          colorPrimary: config.colorPrimary,
+        },
+      },
+    });
+  }, []);
+  const { token } = useToken();
+  const defaultSettingsFromConfig = {
+    fixSiderbar: props.config.fixSiderbar,
+    layout: props.config.layout,
+    splitMenus: props.config.splitMenus,
+    navTheme: props.config.navTheme,
+    contentWidth: props.config.contentWidth,
+    colorPrimary: props.config.colorPrimary,
+  };
+
   const [settings, setSetting] = useState({
-    fixSiderbar: true,
-    layout: "mix",
-    splitMenus: true,
+    ...defaultSettingsFromConfig,
+    // fixSiderbar: true,
+    // layout: "mix",
+    // splitMenus: true,
   });
   const navigate = useNavigate();
   const location = useLocation();
@@ -128,15 +150,13 @@ function App(props) {
       <a onClick={() => customFunction(route)}>{route.breadcrumbName}</a>
     );
   };
+  console.log("prolayout settings", settings?.colorPrimary);
+  console.log("prolayout themesettings", token?.colorPrimary);
 
   return (
     <div id="test-pro-layout" className="App">
       <ProLayout
         bgLayoutImgList={[]}
-        {...config}
-        location={{
-          pathname,
-        }}
         siderMenuType="group"
         menu={{
           collapsedShowGroupTitle: true,
@@ -145,6 +165,11 @@ function App(props) {
           src: "https://cismet.de/images/personal/thorsten.jpg",
           size: "small",
           title: "Settings",
+        }}
+        {...config}
+        {...settings}
+        location={{
+          pathname,
         }}
         actionsRender={(props) => {
           if (props.isMobile) return [];
@@ -198,146 +223,6 @@ function App(props) {
             />,
           ];
         }}
-        // headerTitleRender={(logo, title, _) => {
-        //   const defaultDom = (
-        //     <a>
-        //       {logo}
-        //       {title}
-        //     </a>
-        //   );
-        //   if (document.body.clientWidth < 1400) {
-        //     return defaultDom;
-        //   }
-        //   if (_.isMobile) return defaultDom;
-        //   return (
-        //     <>
-        //       {defaultDom}
-        //       <div
-        //         style={{
-        //           display: "flex",
-        //           alignItems: "center",
-        //         }}
-        //       >
-        //         <Divider
-        //           style={{
-        //             height: "1.5em",
-        //           }}
-        //           type="vertical"
-        //         />
-        //         <Dropdown
-        //           placement="bottom"
-        //           overlay={
-        //             <div
-        //               style={{
-        //                 padding: "32px 40px",
-        //                 backgroundColor: "#fff",
-        //                 width: "calc(100vw - 4px)",
-        //                 height: "307px",
-        //                 boxShadow:
-        //                   "0 8px 16px 0 rgba(0,0,0,0.03), 0 4px 8px 0 rgba(25,15,15,0.07), 0 2px 4px 0 rgba(0,0,0,0.08)",
-        //                 borderRadius: "0 0 6px 6px",
-        //               }}
-        //             >
-        //               <div style={{ display: "flex" }}>
-        //                 <div style={{ flex: 1 }}>
-        //                   <List title="Listtitle" />
-        //                   <List
-        //                     title="Listtitle2"
-        //                     style={{
-        //                       marginBlockStart: 32,
-        //                     }}
-        //                   />
-        //                 </div>
-
-        //                 <div
-        //                   style={{
-        //                     width: "308px",
-        //                     borderInlineStart: "1px solid rgba(0,0,0,0.06)",
-        //                     paddingInlineStart: 16,
-        //                   }}
-        //                 >
-        //                   <div
-        //                     className={css`
-        //                       font-size: 14px;
-        //                       color: rgba(0, 0, 0, 0.45);
-        //                       line-height: 22px;
-        //                     `}
-        //                   >
-        //                     Another List
-        //                   </div>
-        //                   {new Array(3).fill(1).map((name, index) => {
-        //                     return (
-        //                       <div
-        //                         key={index}
-        //                         className={css`
-        //                           border-radius: 4px;
-        //                           padding: 16px;
-        //                           margin-top: 4px;
-        //                           display: flex;
-        //                           cursor: pointer;
-        //                           &:hover {
-        //                             background-color: rgba(0, 0, 0, 0.03);
-        //                           }
-        //                         `}
-        //                       >
-        //                         <img src="https://gw.alipayobjects.com/zos/antfincdn/6FTGmLLmN/bianzu%25252013.svg" />
-        //                         <div
-        //                           style={{
-        //                             marginInlineStart: 14,
-        //                           }}
-        //                         >
-        //                           <div
-        //                             className={css`
-        //                               font-size: 14px;
-        //                               color: rgba(0, 0, 0, 0.85);
-        //                               line-height: 22px;
-        //                             `}
-        //                           >
-        //                             Ant Design
-        //                           </div>
-        //                           <div
-        //                             className={css`
-        //                               font-size: 12px;
-        //                               color: rgba(0, 0, 0, 0.45);
-        //                               line-height: 20px;
-        //                             `}
-        //                           >
-        //                             More famous UI design languages in Hangzhou
-        //                           </div>
-        //                         </div>
-        //                       </div>
-        //                     );
-        //                   })}
-        //                 </div>
-        //               </div>
-        //             </div>
-        //           }
-        //         >
-        //           <div
-        //             style={{
-        //               color: "rgba(0, 0, 0, 0.85)",
-        //               fontWeight: 500,
-        //               cursor: "pointer",
-        //               display: "flex",
-        //               gap: 4,
-        //               paddingInlineStart: 8,
-        //               paddingInlineEnd: 12,
-        //               alignItems: "center",
-        //             }}
-        //             className={css`
-        //               &:hover {
-        //                 background-color: rgba(0, 0, 0, 0.03);
-        //               }
-        //             `}
-        //           >
-        //             <span>Enterprise Asset Center</span>
-        //             <CaretDownFilled />
-        //           </div>
-        //         </Dropdown>
-        //       </div>
-        //     </>
-        //   );
-        // }}
         menuFooterRender={(props) => {
           if (props?.collapsed) return undefined;
           return (
@@ -383,15 +268,6 @@ function App(props) {
             {dom}
           </div>
         )}
-        // breadcrumbRender={(breadcrumbs = []) => {
-        //   //return []; //disable breadcrumbs beacause they link to non hashed history
-        //   console.log("breadcrumbs", breadcrumbs);
-        //   breadcrumbs.map((breadcrumb, index) => {
-        //     const itempath = breadcrumb.path.replace(/^\//, "");
-        //     breadcrumb.path = basepath + "/" + itempath;
-        //     return breadcrumb;
-        //   });
-        // }}
         itemRender={(route, params, routes, paths) => {
           const last = routes.indexOf(route) === routes.length - 1;
           //return paths.join("/");
@@ -401,12 +277,12 @@ function App(props) {
             <Link to={basepath + "/" + paths.join("/")}>{route.breadcrumbName}</Link>
           );
         }}
-        {...settings}
+        // {...settings}
       >
         <div style={{ _border: "1px solid blue", zIndex: 10, marginTop: 0 }}>
           <Outlet />
         </div>
-
+        {/* <ThemeSetterContext.Consumer> */}
         <SettingDrawer
           pathname={pathname}
           enableDarkTheme
@@ -414,9 +290,15 @@ function App(props) {
           settings={settings}
           onSettingChange={(changeSetting) => {
             setSetting(changeSetting);
+            setTheme({
+              token: {
+                colorPrimary: changeSetting.colorPrimary,
+              },
+            });
           }}
           disableUrlParams={true}
         />
+        {/* </ThemeSetterContext.Consumer> */}
       </ProLayout>
     </div>
   );
