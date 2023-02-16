@@ -130,10 +130,10 @@ const LoginPage = ({ basepath = "", config, setTheme }) => {
   return (
     <div style={{ ...styles.loginPage, backgroundImage }}>
       <div style={styles.formContainer}>
-        {/* <div style={styles.floatingPanel}>
+        <div style={styles.floatingPanel}>
           <h2>cids Client</h2>
           <h3>Log in </h3>
-        </div> */}
+        </div>
         <Form
           {...layout}
           name="basic"
