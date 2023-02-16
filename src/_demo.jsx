@@ -132,6 +132,7 @@ const config = {
                 icon: <CrownFilled />,
                 component: "layouts/empty/TableSupportingFormMap",
               },
+
               {
                 path: "single",
                 name: "Single",
@@ -191,6 +192,12 @@ const config = {
             name: "Table + Form & Map",
             icon: <CrownFilled />,
             component: "layouts/mocks/TableSupportingFormMap",
+          },
+          {
+            path: "mapSupportingForm",
+            name: "Map + Form ",
+            icon: <CrownFilled />,
+            component: "layouts/mocks/MapSupportingForm",
           },
           {
             path: "docs",

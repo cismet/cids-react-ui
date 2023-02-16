@@ -1,5 +1,6 @@
 import { HashRouter as Router, Routes, Navigate, Route, Link, useNavigate } from "react-router-dom";
 import Login from "@/pages/login/Login";
+import Login2 from "@/pages/login/Login2";
 import ProLayout from "@/pages/layouts/ProLayout";
 import loadable from "@loadable/component";
 import { ConfigProvider } from "antd";
