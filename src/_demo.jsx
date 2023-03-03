@@ -188,6 +188,12 @@ const config = {
             component: "layouts/mocks/TableMapListsForm",
           },
           {
+            path: "tableTable",
+            name: "Table & Table",
+            icon: <CrownFilled />,
+            component: "layouts/mocks/TableSupportingTable",
+          },
+          {
             path: "tableSupportingFormMap",
             name: "Table + Form & Map",
             icon: <CrownFilled />,
@@ -198,6 +204,12 @@ const config = {
             name: "Map + Form ",
             icon: <CrownFilled />,
             component: "layouts/mocks/MapSupportingForm",
+          },
+          {
+            path: "mapSupportingTable",
+            name: "Map + Table ",
+            icon: <CrownFilled />,
+            component: "layouts/mocks/MapSupportingTable",
           },
           {
             path: "docs",

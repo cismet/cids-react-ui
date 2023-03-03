@@ -264,6 +264,14 @@ export const SimpleTable = (props) => (
   <Table columns={columns} style={props.tableStyle} dataSource={data} />
 );
 
+export const SimpleShortTable = (props) => (
+  <Table
+    columns={columns}
+    style={props.tableStyle}
+    pagination={{ defaultPageSize: props.pageSize || 4 }}
+    dataSource={data}
+  />
+);
 export const SimpleTableNoPagination = (props) => (
   <Table
     style={props.tableStyle}

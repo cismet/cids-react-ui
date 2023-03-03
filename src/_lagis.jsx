@@ -1,4 +1,18 @@
 import { ChromeFilled, CrownFilled, SmileFilled, TabletFilled } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowRight,
+  faClockRotateLeft,
+  faDashboard,
+  faDroplet,
+  faFilePdf,
+  faFolder,
+  faFolderOpen,
+  faMoneyBill,
+  faMugHot,
+  faPieChart,
+  faRoad,
+} from "@fortawesome/free-solid-svg-icons";
 import logo from "@/assets/lagis.png";
 const config = {
   title: "LagIS",
@@ -18,110 +32,74 @@ const config = {
 
         icon: <SmileFilled />,
 
-        redirect: "/examples/dashboard",
+        redirect: "/menu/uebersicht",
+      },
+
+      // {
+      //   path: "/menu",
+      //   name: "Menü",
+      //   icon: <CrownFilled />,
+      //   redirect: "/uebersicht",
+
+      //   component: <div style={{ border: "1px solid red", height: "100vh" }}>Layout Examples</div>,
+      //   routes: [
+
+      //   ],
+      // },
+      {
+        path: "uebersicht",
+        name: "Übersicht",
+        icon: <FontAwesomeIcon icon={faDashboard} />,
+        component: "lagis/Uebersicht",
+      },
+      {
+        path: "verwaltungsbereiche",
+        name: "Verwaltungsbereiche",
+        icon: <FontAwesomeIcon icon={faFolderOpen} />,
+        component: "lagis/Verwaltungsbereiche",
       },
 
       {
-        path: "/examples",
-        name: "Menü",
-        icon: <CrownFilled />,
-        redirect: "/examples/dashboard",
-
-        component: <div style={{ border: "1px solid red", height: "100vh" }}>Layout Examples</div>,
-        routes: [
-          {
-            path: "dashboard",
-            name: "Übersicht",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/Dashboard",
-          },
-          {
-            path: "tableSupportingFormMap",
-            name: "Verwaltungsbereiche",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/TableSupportingFormMap",
-          },
-
-          {
-            path: "mapList",
-            name: "Miet- und Pachtverträge",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/MapList",
-          },
-          {
-            path: "mapList",
-            name: "Rechte und Belastungen",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/MapList",
-          },
-          {
-            path: "docsAndForms",
-            name: "Docs & Forms & Notes",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/DocsAndForms",
-          },
-          {
-            path: "tableSupportingListMap",
-            name: "Table & List,Map",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/TableSupportingListMap",
-          },
-          {
-            path: "tableMapListsForm",
-            name: "Table & Map + List & Forms",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/TableMapListsForm",
-          },
-
-          {
-            path: "docs",
-            name: "Docs",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/OnlyDocs",
-          },
-          {
-            path: "graph",
-            name: "Graph & Settings",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/GraphWithSettingsForms",
-          },
-          {
-            path: "largetable",
-            name: "Large Table",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/LargeTable",
-          },
-          {
-            path: "designer",
-            name: "Designer",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/Designer",
-          },
-          {
-            path: "timeline",
-            name: "Timeline",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/Timeline",
-          },
-          {
-            path: "calendar",
-            name: "Calendar",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/Calendar",
-          },
-          {
-            path: "fullsizeMap",
-            name: "Fullsize Map",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/FullsizedMap",
-          },
-          {
-            path: "unfinisheddashboard",
-            name: "Loading Dashboard",
-            icon: <CrownFilled />,
-            component: "layouts/mocks/Multi",
-          },
-        ],
+        path: "mipa",
+        name: "Miet- und Pachtverträge",
+        icon: <FontAwesomeIcon icon={faMoneyBill} />,
+        component: "lagis/Mipa",
+      },
+      {
+        path: "rebe",
+        name: "Rechte und Belastungen",
+        icon: <FontAwesomeIcon icon={faRoad} />,
+        component: "lagis/Rebe",
+      },
+      {
+        path: "nutzung",
+        name: "Nutzung",
+        icon: <FontAwesomeIcon icon={faPieChart} />,
+        component: "lagis/Nutzung",
+      },
+      {
+        path: "vorgaenge",
+        name: "Vorgänge",
+        icon: <FontAwesomeIcon icon={faArrowRight} />,
+        component: "lagis/Vorgaenge",
+      },
+      {
+        path: "historie",
+        name: "Historie",
+        icon: <FontAwesomeIcon icon={faClockRotateLeft} />,
+        component: "lagis/Historie",
+      },
+      {
+        path: "kassenzeichen",
+        name: "Kassenzeichen",
+        icon: <FontAwesomeIcon icon={faDroplet} />,
+        component: "lagis/Kassenzeichen",
+      },
+      {
+        path: "dms",
+        name: "DMS",
+        icon: <FontAwesomeIcon icon={faFilePdf} />,
+        component: "lagis/DMS",
       },
 
       // {
