@@ -1,4 +1,3 @@
-import { ChromeFilled, CrownFilled, SmileFilled, TabletFilled } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -6,10 +5,8 @@ import {
   faDashboard,
   faDroplet,
   faFilePdf,
-  faFolder,
   faFolderOpen,
   faMoneyBill,
-  faMugHot,
   faPieChart,
   faRoad,
 } from "@fortawesome/free-solid-svg-icons";
@@ -29,23 +26,8 @@ const config = {
     routes: [
       {
         path: "/",
-
-        icon: <SmileFilled />,
-
         redirect: "/menu/uebersicht",
       },
-
-      // {
-      //   path: "/menu",
-      //   name: "Menü",
-      //   icon: <CrownFilled />,
-      //   redirect: "/uebersicht",
-
-      //   component: <div style={{ border: "1px solid red", height: "100vh" }}>Layout Examples</div>,
-      //   routes: [
-
-      //   ],
-      // },
       {
         path: "uebersicht",
         name: "Übersicht",
@@ -101,12 +83,6 @@ const config = {
         icon: <FontAwesomeIcon icon={faFilePdf} />,
         component: "lagis/DMS",
       },
-
-      // {
-      //   path: "https://ant.design",
-      //   name: "Ant Design ",
-      //   icon: <ChromeFilled />,
-      // },
     ],
   },
   location: {
