@@ -26,7 +26,7 @@ const config = {
     routes: [
       {
         path: "/",
-        redirect: "/menu/uebersicht",
+        redirect: "/uebersicht",
       },
       {
         path: "uebersicht",
